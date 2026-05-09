@@ -132,8 +132,8 @@ func getNetDiskMetrics() NetDiskMetrics {
 		lastDiskStats = totalDisk
 	}
 
-	networkSpeed.With(prometheus.Labels{"direction": "upload"}).Set(metrics.OutBytesPerSec)
-	networkSpeed.With(prometheus.Labels{"direction": "download"}).Set(metrics.InBytesPerSec)
+	networkSpeed.With(prometheus.Labels{"direction": "upload"}).Set(metrics.OutBytesPerSec / 1024)
+	networkSpeed.With(prometheus.Labels{"direction": "download"}).Set(metrics.InBytesPerSec / 1024)
 	diskIOSpeed.With(prometheus.Labels{"operation": "read"}).Set(metrics.ReadKBytesPerSec * 1024)
 	diskIOSpeed.With(prometheus.Labels{"operation": "write"}).Set(metrics.WriteKBytesPerSec * 1024)
 	diskIOPS.With(prometheus.Labels{"operation": "read"}).Set(metrics.ReadOpsPerSec)
